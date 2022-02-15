@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +29,7 @@ class PostController extends Controller
         return view('create-post');
     }
 
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
         DB::listen(function ($query) {
             info($query->sql);
@@ -40,12 +41,7 @@ class PostController extends Controller
         // $post->is_published = $request->get('is_published', false);
         // $post->save();
 
-        // $data = [
-        //     'title' => $request->get('title', ''),
-        //     'body' => $request->get('body', ''),
-        //     'is_published' => $request->get('is_published', false),
-        // ];
-        $data = $request->only(['title', 'body', 'is_published']);
+        $data = $request->validated();
 
         $post = Post::create($data);
 
