@@ -18,10 +18,18 @@
     <div>
         @include('partials.navbar')
     </div>
-    <div>
-        @yield('content')
-    </div>
 
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-3">
+                @include('partials.sidebar')
+            </div>
+            <div class="col-md-9">
+                @yield('content')
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

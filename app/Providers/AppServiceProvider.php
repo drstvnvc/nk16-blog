@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Post;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $latestPosts = Post::published()
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
+
+        View::share('latestPosts', $latestPosts);
     }
 }

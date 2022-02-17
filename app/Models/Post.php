@@ -15,6 +15,15 @@ class Post extends Model
         'is_published',
     ];
 
+    // public static function published() {
+    //     return self::where('is_published', true);
+    // }
+
+    public function scopePublished($query)
+    {
+        return $query->where('is_published', true);
+    }
+
     public function comments()
     {
         return $this->hasMany(Comment::class);
