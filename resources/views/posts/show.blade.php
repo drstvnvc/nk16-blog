@@ -15,6 +15,8 @@
     @foreach ($post->comments as $comment)
     <li>{{$comment->body}}</li>
     @endforeach
+
+    @auth
     <li>
         <form method="POST" action="/posts/{{$post->id}}/comments">
             @csrf
@@ -22,5 +24,6 @@
             <button type="submit">Submit</button>
         </form>
     </li>
+    @endauth
 </ul>
 @endsection

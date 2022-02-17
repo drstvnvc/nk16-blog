@@ -30,11 +30,12 @@ class AuthController extends Controller
 
     public function getMyProfile()
     {
-        // Auth::login($user)
-        // Auth::id()
-        // Auth::user()
-        // Auth::check()
-        // Auth::logout()
+        // Auth::login($user) - set user to session
+        // Auth::attempt($credentials) - check if user exists and passwords match, and set it to session
+        // Auth::id() - get id of active user from session
+        // Auth::user() - get id of active user from session and then fetch the user from db
+        // Auth::check() - check if active user exists
+        // Auth::logout() - remove active user from session
         $user = Auth::user();
         return $user;
     }
@@ -66,5 +67,10 @@ class AuthController extends Controller
         // } else {
         //     return 'Invalid credentials';
         // }
+    }
+
+    public function logout() {
+        Auth::logout();
+        return redirect('/login');
     }
 }

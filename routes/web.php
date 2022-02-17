@@ -17,15 +17,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/posts', [PostController::class, 'index']);
-Route::get('/posts/create', [PostController::class, 'create']);
+Route::get('/posts/create', [PostController::class, 'create'])->middleware('auth');
+Route::post('/posts', [PostController::class, 'store'])->middleware('auth');
 Route::get('/posts/{id}', [PostController::class, 'show']);
-Route::post('/posts', [PostController::class, 'store']);
 
-Route::post('/posts/{post_id}/comments', [CommentController::class, 'store']);
+Route::post('/posts/{post_id}/comments', [CommentController::class, 'store'])->middleware('auth');
 
 
 Route::get('/register', [AuthController::class, 'getRegisterForm']);
 Route::post('/register', [AuthController::class, 'register']);
-Route::get('/login', [AuthController::class, 'getLoginForm']);
+Route::get('/login', [AuthController::class, 'getLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
 Route::get('/profile', [AuthController::class, 'getMyProfile']);
