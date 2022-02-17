@@ -24,9 +24,9 @@ Route::get('/posts/{id}', [PostController::class, 'show']);
 Route::post('/posts/{post_id}/comments', [CommentController::class, 'store'])->middleware('auth');
 
 
-Route::get('/register', [AuthController::class, 'getRegisterForm']);
-Route::post('/register', [AuthController::class, 'register']);
-Route::get('/login', [AuthController::class, 'getLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
+Route::get('/register', [AuthController::class, 'getRegisterForm'])->middleware('guest');
+Route::post('/register', [AuthController::class, 'register'])->middleware('guest');
+Route::get('/login', [AuthController::class, 'getLoginForm'])->name('login')->middleware('guest');
+Route::post('/login', [AuthController::class, 'login'])->middleware('guest');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
 Route::get('/profile', [AuthController::class, 'getMyProfile']);
