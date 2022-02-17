@@ -17,7 +17,9 @@
                 </li> -->
             </ul>
             <span class="navbar-text">
-                Navbar text with an inline element
+                @auth
+                    {{auth()->user()->name}}
+                @endauth
             </span>
         </div>
     </div>
