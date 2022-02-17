@@ -13,7 +13,7 @@ class PostController extends Controller
     {
         $posts = Post::published()->get();
 
-        return view('posts', compact('posts')); // [ 'posts' => $posts]
+        return view('posts.index', compact('posts')); // [ 'posts' => $posts]
     }
 
     public function show($id)
@@ -21,12 +21,12 @@ class PostController extends Controller
         // $post = Post::where('id', $id)->first();
         $post = Post::findOrFail($id);
 
-        return view('post', compact('post')); // [ 'post' => $post]
+        return view('posts.show', compact('post')); // [ 'post' => $post]
     }
 
     public function create(Request $request)
     {
-        return view('create-post');
+        return view('posts.create');
     }
 
     public function store(StorePostRequest $request)
