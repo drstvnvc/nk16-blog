@@ -12,7 +12,11 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::published()->get();
+        DB::listen(function ($query) {
+            info($query->sql);
+        });
+
+        $posts = Post::with('comments', 'author')->published()->get();
 
         return view('posts.index', compact('posts')); // [ 'posts' => $posts]
     }
@@ -44,7 +48,7 @@ class PostController extends Controller
 
         $data = $request->validated();
 
-        $post = Post::create($data);
+        $post = Auth::user()->posts()->create($data);
 
         // return view('post', compact('post'));
         return redirect("/posts/$post->id");

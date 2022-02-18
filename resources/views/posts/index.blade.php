@@ -7,7 +7,8 @@
 <ul>
     @foreach($posts as $post)
     <li>
-        <a href="/posts/{{$post->id}}">{{$post->title}}</a>
+        <a href="/posts/{{$post->id}}">{{$post->title}} ({{$post->comments->count()}})</a>
+        <a href="/authors/{{$post->author->id}}">{{$post->author->name}}</a>
     </li>
     @endforeach
 </ul>

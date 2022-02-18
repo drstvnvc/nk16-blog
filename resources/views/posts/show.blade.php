@@ -4,6 +4,8 @@
 
 @section('content')
 <h1>{{$post->title}}</h1>
+<h4><a href="/authors/{{$post->author->id}}">{{$post->author->name}}</a></h4>
+
 <p>
     {{$post->body}}
 </p>
