@@ -19,6 +19,12 @@
         @include('partials.navbar')
     </div>
 
+    @if(session()->has('flashMessage'))
+    <div class="alert alert-success" id="flash_message">
+        {{session('flashMessage')}}
+    </div>
+    @endif
+
     <div class="container-fluid">
         <div class="row">
 
@@ -30,6 +36,20 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function onload() {
+            setTimeout(function() {
+                let msg = document.getElementById('flash_message');
+                if (!msg) {
+                    return;
+                }
+
+                msg.style.display = 'None';
+            }, 2000)
+        }
+        onload();
+    </script>
 </body>
 
 </html>

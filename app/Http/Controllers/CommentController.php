@@ -23,6 +23,8 @@ class CommentController extends Controller
         Mail::to($post->author)->send(
             new CommentReceived($comment, $commentCreator)
         );
+        $request->session()->flash('flashMessage', 'Email notification sent');
+
         return back();
     }
 }

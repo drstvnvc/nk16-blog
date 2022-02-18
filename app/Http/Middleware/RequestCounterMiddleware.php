@@ -17,10 +17,16 @@ class RequestCounterMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check()) {
-            return  $next($request);
-        } else {
-            return redirect('/login');
-        }
+        // $numOfRequest = $request->session()->get('number_of_requests', 0);
+        $numOfRequest = session('number_of_requests', 0);
+
+        $numOfRequest += 1;
+
+        // $request->session()->put'number_of_requests', $numOfRequest);
+        session([
+            'number_of_requests' => $numOfRequest
+        ]);
+
+        return $next($request);
     }
 }
